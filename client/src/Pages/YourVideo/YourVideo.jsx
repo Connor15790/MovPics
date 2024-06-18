@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import LeftSidebar from "../../Components/LeftSidebar/LeftSidebar";
 import ShowVideoGrid from "../../Components/ShowVideoGrid/ShowVideoGrid";
 
-import vid from "../../Components/Video/vid.mp4";
+// import vid from "../../Components/Video/vid.mp4";
 import "./yourVideo.css";
 
 function YourVideo() {
@@ -48,6 +48,7 @@ function YourVideo() {
   //     description: "description of  video 3",
   //   },
   // ];
+  
   return (
     <div className="container_Pages_App">
       <LeftSidebar />

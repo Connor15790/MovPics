@@ -97,9 +97,20 @@
   transition: opacity 150ms ease-in-out;
 }
 
+.vidcontrolscontainer::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+  width: 100%;
+  aspect-ratio: 6 / 1;
+  z-index: -1;
+  pointer-events: none;
+}
+
 .vidcontainer:hover .vidcontrolscontainer,
 .vidcontainer:focus-within .vidcontrolscontainer,
-.vidcontainer.paused .vidcontrolscontainer {
+.vidcontainer.paused:hover .vidcontrolscontainer {
   opacity: 1;
 }
 
