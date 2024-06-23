@@ -38,7 +38,7 @@
 }
 .apps_Box{
     width: 25px;
-    margin: auto 0.7rem;
+    margin: auto 01rem;
     height: 25px;
     display: flex;
     flex-wrap: wrap;

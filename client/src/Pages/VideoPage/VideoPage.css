@@ -4,10 +4,17 @@
   background-color: rgb(11, 11, 11);
   color: white;
 }
-.container2_videoPage {
-  margin: 1.5rem 4.5rem;
+
+.container2_videoPage1 {
+  margin: 1.5rem 7.5rem;
   display: flex;
 }
+
+.container2_videoPage2 {
+  /* margin: 1.5rem 4.5rem; */
+  display: flex;
+}
+
 .video_display_screen_videoPage {
   width: calc(100vw - 4.5rem - 35vw);
   padding: 1rem;
@@ -25,16 +32,19 @@
   border-bottom: 3px solid rgba(245, 222, 179, 0.175);
   flex-grow: 1;
 }
+
 .video_title_VideoPage {
   font-size: x-large;
   margin: 0;
   padding: 1rem 0.8rem;
 }
+
 .views_date_btns_VideoPage {
   display: flex;
   margin: 0.5rem 1rem;
   width: calc(100vw - 6.5rem - 35vw);
 }
+
 .views_videoPage {
   display: flex;
   font-size: 0.8rem;
@@ -49,6 +59,7 @@
   color: aliceblue;
   font-weight: bolder;
 }
+
 .chanel_logo_videoPage {
   display: flex;
   border: 1px solid rgba(0, 0, 0, 0.19);
@@ -64,23 +75,35 @@
   margin: auto;
   font-size: xx-large;
 }
+
 .chanel_name_videoPage {
   font-weight: bolder;
   margin: auto 1rem;
   font-size: larger;
 }
+
 .comments_VideoPage{
     width: 100%;
     padding-inline-start: 0.5rem;
 }
+
 .moreVideoBar{
     width: calc(100vw - 4.5rem - 70vw);
     padding: 0 1rem;
 }
 
-.vidcontainer {
+.vidcontainer1 {
   /* width: 90%; */
   max-width: 1000px;
+  display: flex;
+  justify-content: center;
+  margin-inline: auto;
+  position: relative;
+}
+
+.vidcontainer2 {
+  width: 160%;
+  /* max-width: 1000px; */
   display: flex;
   justify-content: center;
   margin-inline: auto;
@@ -108,9 +131,15 @@
   pointer-events: none;
 }
 
-.vidcontainer:hover .vidcontrolscontainer,
-.vidcontainer:focus-within .vidcontrolscontainer,
-.vidcontainer.paused:hover .vidcontrolscontainer {
+.vidcontainer1:hover .vidcontrolscontainer,
+.vidcontainer1:focus-within .vidcontrolscontainer,
+.vidcontainer1.paused:hover .vidcontrolscontainer {
+  opacity: 1;
+}
+
+.vidcontainer2:hover .vidcontrolscontainer,
+.vidcontainer2:focus-within .vidcontrolscontainer,
+.vidcontainer2.paused:hover .vidcontrolscontainer {
   opacity: 1;
 }
 
@@ -138,10 +167,18 @@
   opacity: 1;
 }
 
-.vidcontainer.paused .pause-icon {
+/* .vidcontainer1.paused .pause-icon {
   display: none;
 }
 
-.vidcontainer:not(.paused) .play-icon {
+.vidcontainer1:not(.paused) .play-icon {
+  display: none;
+} */
+
+/* .vidcontainer2.paused .pause-icon {
   display: none;
 }
+
+.vidcontainer2:not(.paused) .play-icon {
+  display: none;
+} */
