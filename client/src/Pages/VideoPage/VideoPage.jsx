@@ -170,7 +170,7 @@ function VideoPage() {
               </div>
               <video
                 // src={`http://localhost:5500/${vv?.filePath}`}
-                src={`https://mov-.app/${vv?.filePath}`}
+                src={`https://mov-pics.vercel.app/${vv?.filePath}`}
                 className={"video_ShowVideo_videoPage"}
                 ref={videoRef}
                 autoPlay
