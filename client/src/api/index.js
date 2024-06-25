@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const API = axios.create({ baseURL: `http://localhost:5500/` });
-const API = axios.create({ baseURL: `https://mov-pics.vercel.app/` });
+const API = axios.create({ baseURL: `http://localhost:5500/` });
+// const API = axios.create({ baseURL: `https://mov-pics.vercel.app/` });
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("Profile")) {
