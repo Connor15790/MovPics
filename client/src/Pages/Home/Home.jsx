@@ -63,9 +63,14 @@ function Home() {
         <div className="navigation_Home">
           {NavList.map((m) => {
             return (
+              <>
               <p key={m} className="btn_nav_home">
                 {m}
               </p>
+              {/* <iframe width="420" height="345"
+src="http://www.youtube.com/embed/XGSy3_Czz8k">
+</iframe> */}
+              </>
             );
           })}
         </div>
