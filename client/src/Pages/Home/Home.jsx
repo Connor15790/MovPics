@@ -56,6 +56,7 @@ function Home() {
     "Gaming",
     "Comedy",
   ];
+  
   return (
     <div className="container_Pages_App">
       <LeftSidebar />
