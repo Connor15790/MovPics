@@ -13,6 +13,7 @@ import { faVolumeMute, faVolumeDown, faVolumeUp } from '@fortawesome/free-solid-
 
 function VideoPage() {
   const { vid } = useParams();
+  const buttonRef = useRef(null);
   const videoRef = useRef(null);
 
   const [isPlaying, setIsPlaying] = useState(true);
@@ -21,12 +22,26 @@ function VideoPage() {
   const [volume, setVolume] = useState(1);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [isSettModalOpen, setIsSettModalOpen] = useState(false);
+  const [isSpeedModalOpen, setIsSpeedModalOpen] = useState(false);
+  const [isQualityModalOpen, setIsQualityModalOpen] = useState(false);
+  const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
 
   const vids = useSelector((state) => state.videoReducer);
   // console.log(vids)
   const vv = vids?.data.filter((q) => q._id === vid)[0];
   const dispatch = useDispatch();
   const CurrentUser = useSelector((state) => state?.currentUserReducer);
+
+  useEffect(() => {
+    if (buttonRef.current) {
+      const buttonRect = buttonRef.current.getBoundingClientRect();
+      setModalPosition({
+        top: buttonRect.top - buttonRect.height - 10, // Adjust the vertical positioning
+        left: buttonRect.left
+      });
+    }
+  }, [isSettModalOpen]);
 
   useEffect(() => {
     const videoElement = videoRef.current;
@@ -47,7 +62,6 @@ function VideoPage() {
       videoElement.removeEventListener('loadedmetadata', handleLoadedMetadata);
     };
   }, []);
-
 
   useEffect(() => {
     if (CurrentUser) {
@@ -172,6 +186,30 @@ function VideoPage() {
     return `${minutes}:${seconds}`;
   };
 
+  const toggleSettModal = () => {
+    setIsSettModalOpen(!isSettModalOpen);
+  };
+
+  const toggleSpeedModal = () => {
+    setIsSettModalOpen(false);
+    setIsSpeedModalOpen(!isSpeedModalOpen);
+  }
+
+  const toggleB2SettModal1 = () => {
+    setIsSpeedModalOpen(false);
+    setIsSettModalOpen(true);
+  }
+
+  const toggleB2SettModal2 = () => {
+    setIsQualityModalOpen(false);
+    setIsSettModalOpen(true);
+  }
+
+  const toggleQualityModal = () => {
+    setIsSettModalOpen(false);
+    setIsQualityModalOpen(!isQualityModalOpen);
+  }
+
   return (
     <>
       <div className="container_videoPage">
@@ -210,9 +248,103 @@ function VideoPage() {
                       /
                       <div className="totalTime">{formatTime(duration)}</div>
                     </div>
-                    <button className="settingsbtn" style={{ marginTop: 4 }}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M24 13.616v-3.232c-1.651-.587-2.693-.752-3.219-2.019v-.001c-.527-1.271.1-2.134.847-3.707l-2.285-2.285c-1.561.742-2.433 1.375-3.707.847h-.001c-1.269-.526-1.435-1.576-2.019-3.219h-3.232c-.582 1.635-.749 2.692-2.019 3.219h-.001c-1.271.528-2.132-.098-3.707-.847l-2.285 2.285c.745 1.568 1.375 2.434.847 3.707-.527 1.271-1.584 1.438-3.219 2.02v3.232c1.632.58 2.692.749 3.219 2.019.53 1.282-.114 2.166-.847 3.707l2.285 2.286c1.562-.743 2.434-1.375 3.707-.847h.001c1.27.526 1.436 1.579 2.019 3.219h3.232c.582-1.636.749-2.69 2.027-3.222h.001c1.262-.524 2.12.101 3.698.851l2.285-2.286c-.743-1.563-1.375-2.433-.848-3.706.527-1.271 1.588-1.44 3.221-2.021zm-12 3.384c-2.762 0-5-2.239-5-5s2.238-5 5-5 5 2.239 5 5-2.238 5-5 5zm3-5c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3z" /></svg>
-                    </button>
+                    <div className="settingsContainer">
+                      <button className="settingsbtn" style={{ marginTop: 4 }} onClick={toggleSettModal}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M24 13.616v-3.232c-1.651-.587-2.693-.752-3.219-2.019v-.001c-.527-1.271.1-2.134.847-3.707l-2.285-2.285c-1.561.742-2.433 1.375-3.707.847h-.001c-1.269-.526-1.435-1.576-2.019-3.219h-3.232c-.582 1.635-.749 2.692-2.019 3.219h-.001c-1.271.528-2.132-.098-3.707-.847l-2.285 2.285c.745 1.568 1.375 2.434.847 3.707-.527 1.271-1.584 1.438-3.219 2.02v3.232c1.632.58 2.692.749 3.219 2.019.53 1.282-.114 2.166-.847 3.707l2.285 2.286c1.562-.743 2.434-1.375 3.707-.847h.001c1.27.526 1.436 1.579 2.019 3.219h3.232c.582-1.636.749-2.69 2.027-3.222h.001c1.262-.524 2.12.101 3.698.851l2.285-2.286c-.743-1.563-1.375-2.433-.848-3.706.527-1.271 1.588-1.44 3.221-2.021zm-12 3.384c-2.762 0-5-2.239-5-5s2.238-5 5-5 5 2.239 5 5-2.238 5-5 5zm3-5c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3z" /></svg>
+                      </button>
+
+                      {isSettModalOpen && (
+                        <div className="modal-overlay" onClick={toggleSettModal}>
+                          <div
+                            className="modal-content"
+                            onClick={(e) => e.stopPropagation()}
+                            style={{ top: modalPosition.top, left: modalPosition.left }}
+                          >
+                            <p className="close-modal-button" onClick={toggleSettModal}>
+                              <span style={{ textAlign: "left" }}>Subtitles/CC</span>
+                              <span style={{ textAlign: "right", fontWeight: "bold" }}>&gt;</span>
+                            </p>
+                            <p className="close-modal-button" onClick={toggleSpeedModal}>
+                              <span style={{ textAlign: "left" }}>Playback speed</span>
+                              <span style={{ textAlign: "right", fontWeight: "bold" }}>&gt;</span>
+                            </p>
+                            <p className="close-modal-button" onClick={toggleQualityModal}>
+                              <span style={{ textAlign: "left" }}>Quality</span>
+                              <span style={{ textAlign: "right", fontWeight: "bold" }}>&gt;</span>
+                            </p>
+                          </div>
+                        </div>
+                      )}
+
+                      {isSpeedModalOpen && (
+                        <div className="speedmodal-overlay" onClick={toggleSpeedModal}>
+                          <div
+                            className="modal-content"
+                            onClick={(e) => e.stopPropagation()}
+                            style={{ top: modalPosition.top, left: modalPosition.left }}
+                          >
+                            <p className="close-modal-button" onClick={toggleB2SettModal1}>
+                              <span style={{ textAlign: "left" }}>&lt;</span>
+                              <span style={{ textAlign: "left", fontWeight: "bold" }}>Playback speed</span>
+                            </p>
+                            <p className="close-modal-button" onClick={toggleSettModal}>
+                              <span style={{ textAlign: "left" }}>0.25</span>
+                            </p>
+                            <p className="close-modal-button" onClick={toggleSettModal}>
+                              <span style={{ textAlign: "left" }}>0.5</span>
+                            </p>
+                            <p className="close-modal-button" onClick={toggleSettModal}>
+                              <span style={{ textAlign: "left" }}>0.75</span>
+                            </p>
+                            <p className="close-modal-button" onClick={toggleSettModal}>
+                              <span style={{ textAlign: "left" }}>Normal</span>
+                            </p>
+                            <p className="close-modal-button" onClick={toggleSettModal}>
+                              <span style={{ textAlign: "left" }}>1.25</span>
+                            </p>
+                            <p className="close-modal-button" onClick={toggleSettModal}>
+                              <span style={{ textAlign: "left" }}>1.5</span>
+                            </p>
+                            <p className="close-modal-button" onClick={toggleSettModal}>
+                              <span style={{ textAlign: "left" }}>1.75</span>
+                            </p>
+                            <p className="close-modal-button" onClick={toggleSettModal}>
+                              <span style={{ textAlign: "left" }}>2</span>
+                            </p>
+                          </div>
+                        </div>
+                      )}
+
+                      {isQualityModalOpen && (
+                        <div className="qualitymodal-overlay" onClick={toggleQualityModal}>
+                          <div
+                            className="modal-content"
+                            onClick={(e) => e.stopPropagation()}
+                            style={{ top: modalPosition.top, left: modalPosition.left }}
+                          >
+                            <p className="close-modal-button" onClick={toggleB2SettModal2}>
+                              <span style={{ textAlign: "left" }}>&lt;</span>
+                              <span style={{ textAlign: "left", fontWeight: "bold" }}>Quality</span>
+                            </p>
+                            <p className="close-modal-button" onClick={toggleSettModal}>
+                              <span style={{ textAlign: "left" }}>720p</span>
+                            </p>
+                            <p className="close-modal-button" onClick={toggleSettModal}>
+                              <span style={{ textAlign: "left" }}>480p</span>
+                            </p>
+                            <p className="close-modal-button" onClick={toggleSettModal}>
+                              <span style={{ textAlign: "left" }}>360p</span>
+                            </p>
+                            <p className="close-modal-button" onClick={toggleSettModal}>
+                              <span style={{ textAlign: "left" }}>240p</span>
+                            </p>
+                            <p className="close-modal-button" onClick={toggleSettModal}>
+                              <span style={{ textAlign: "left" }}>144p</span>
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                     <button className="miniplayerbtn" onClick={handleEnterPiP}>
                       <svg viewBox="0 0 24 24">
                         <path fill="currentColor" d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zm-10-7h9v6h-9z" />
